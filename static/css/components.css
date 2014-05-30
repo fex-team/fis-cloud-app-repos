@@ -1,0 +1,15 @@
+div#latest-updates,div#most-depended-on{
+    border-right : 1px dotted #999;
+}
+
+li.row-fluid:hover{
+    background-color : #f5f5f5;
+}
+
+div#most-depended-on a{
+    font-weight: bold;
+}
+
+li{
+	word-wrap: break-word;
+}

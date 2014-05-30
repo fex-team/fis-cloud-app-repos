@@ -1,0 +1,77 @@
+extends ./layout/layout.jade
+
+block stylesheets
+    link(
+        rel="stylesheet"
+        href="/static/#{appName}/css/components.css"
+    )
+
+block content
+    .container-fluid
+        .row-fluid(style='margin-top: 20px;')
+            .page-main.page-home.span9
+              .container-fluid
+                .row-fluid
+                  .span12
+                    h1
+                    form#package-search-form.form-inline(style='margin-top: 1em;', action='#{searchUrl}',method='GET')
+                      .control-group
+                        .input-append
+                          input#package-search-q(type='text',name='key',placeholder='Search')
+                          button#package-search-submit.btn(type='submit') 搜索
+                          span.help-inline
+                #searchResults.row-fluid(style='margin-top: 1.618em; display: none;')
+                #overview.row-fluid(style='margin-top: 1.618em;')
+                  .span6
+                    h3 最近更新
+                    #latest-updates
+                        ol.package-list
+                            for updateComponent in data.updateComponents
+                                li.row-fluid
+                                    .span1
+                                        img(src="http://www.gravatar.com/avatar/#{updateComponent.emailhash}?size=32")
+                                    .details.span7
+                                        .span4
+                                            a.user(href='/#{appName}/user_detail?name=#{updateComponent.updateAuthor}')
+                                                | #{updateComponent.updateAuthor}
+                                        .span8(style="font-weight:bold;")
+                                            a.name.emphases(href='#{updateComponent.componentUrl}') #{updateComponent.name}
+                                    .extra.span4
+                                        | Update &nbsp;#{updateComponent.updateTime}
+                  .span3
+                    h3 下载排行榜
+                    #most-depended-on
+                        ol.package-list
+                            for downloadComponent in data.downloadComponents
+                                li.row-fluid
+                                    .details.span7
+                                        a.name.emphases(href='#{downloadComponent.componentUrl}') #{downloadComponent.name}
+                                    .extra.span5
+                                        | #{downloadComponent.totaldowns}  downloads
+                  .span3
+                    h3 贡献排行榜
+                    #top-submittors
+                        ol.package-list
+                            for submittorComponent in data.submittorComponents
+                                li.row-fluid
+                                    .details.span7
+                                        a.user.emphases(href='/#{appName}/user_detail?name=#{submittorComponent.name}') #{submittorComponent.name}
+                                    .extra.span5
+                                        | #{submittorComponent.value}  packages
+
+            .page-sidebar.span3(style="height:600px")
+                .container-fluid
+                    h4 分类
+                    #categories.loaded-counts
+                        ul.nav.nav-list.category-list
+                            for cate in data.categories
+                                li(rel='#{cate.name}')
+                                    a.emphases(href='/#{appName}/category?type=#{cate.name}') #{cate.name}
+                                        span.count&nbsp;(#{cate.number})
+                    h4 热门
+                    #tags.loaded-counts
+                        ul.nav.nav-list.category-list
+                            for tag in data.hotTags
+                                li(rel='#{tag.name}')
+                                    a.emphases(href='/#{appName}/category?type=#{tag.name}') #{tag.name}
+                                        span.count&nbsp;(#{tag.number})

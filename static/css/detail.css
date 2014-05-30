@@ -1,0 +1,31 @@
+pre.sh {
+    background: #dddddd;
+    padding: 0.4em 0;
+}
+
+.sh_sourceCode {
+    font-weight: normal;
+    font-style: normal;
+}
+
+pre {
+    white-space: pre;
+    word-wrap: normal;
+    display: block;
+    width: auto;
+    max-width: 100%;
+    overflow: auto;
+    border : none;
+}
+
+.downloads {
+    padding: 7px;
+}
+
+div .user {
+    padding-top:8px;
+}
+
+div .downloads {
+    font-weight: bold;
+}

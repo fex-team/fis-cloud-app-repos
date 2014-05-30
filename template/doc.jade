@@ -1,0 +1,28 @@
+extends ./layout/layout.jade
+
+block stylesheets
+	link(
+		rel="stylesheet"
+		href="/static/#{appName}/css/doc.css"
+	)
+
+block content
+	.container-fluid.docs-page
+		.row-fluid
+			.span1 &nbsp;
+			.span10.page-heading
+				h1 
+					i.icon-book
+					fis component documentation
+		.row-fluid
+			.docs-nav.span1
+				if nav
+					ul.nav.nav-list
+						each val, index in nav
+							li.nav-header 
+								a(href='#{val.id}') #{index} 
+							if val.list
+								each listval, listindex in val.list
+									li.nav-list
+										a(href='#{listval.id}') #{listindex}
+			.docs.span9!= doc

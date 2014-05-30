@@ -1,0 +1,64 @@
+extends ./layout/layout.jade
+
+block stylesheets
+    link(
+        rel="stylesheet"
+        href="/static/#{appName}/css/user_detail.css"
+    )
+
+block content
+    .container-fluid
+      .row-fluid(style='margin-top: 20px;')
+        .page-main.user-packages.span7
+          .container-fluid
+            h1
+              a(href='/#{appName}/components') Components
+              i.icon-chevron-right(style='font-size: 72%; color: #999; margin: 0 0.65em;')
+              span(style='color: #999;') User
+              i.icon-chevron-right(style='font-size: 72%; color: #999; margin: 0 0.65em;')
+              | #{user.name}
+            #user-packages-info
+              table.table
+                tbody
+                  tr
+                    td
+                        .span9
+                            h4 Total Packages
+                        .span3
+                            h4(style="margin-left:15px") #{total}
+              ul.package-list
+                for component in components
+                    li.row-fluid
+                        .span9
+                            h4
+                                a.name(href='#{component.componentUrl}') #{component.name}
+                            .description
+                                | #{component.description}
+                        .modified.span3
+                            |Update&nbsp; #{component.updateTime}
+        .page-sidebar.span5
+          .container-fluid
+            .mini-profile
+              .avatar
+                img(src='http://www.gravatar.com/avatar/#{emailhash}?s=160')
+              if isLogin
+                  .change-panel
+                    span |
+                    a(href='/usersite/password?url=#{redirectUrl}') 修改密码
+                    span |
+                    a(href='/usersite/email?url=#{redirectUrl}') 修改E-mail
+                    span |
+                    a(href='https://en.gravatar.com/site/login') 修改头像
+                    span |
+              table.table.table-striped
+                tbody
+                  tr
+                    th 姓名
+                    td #{user.name}
+                  tr
+                    th 注册时间
+                    td #{user.createTime}
+                  tr
+                    th 邮箱
+                    td
+                      a(href='mailto:#{user.email}') #{user.email}

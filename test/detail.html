@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div id="detail"></div>
+    <script>
+        var div = document.getElementById("detail"),
+            date = (new Date()).getTime();
+        var str = "<a href=\"http://localhost:3459/fisrepo/component_detail?name=fis-cloud-app-ppt&time=" + date + "\">fis-cloud-app-ppt<\/a>";
+        div.innerHTML = str;
+    </script>
+</body>
+</html>

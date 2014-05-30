@@ -1,0 +1,43 @@
+.tabbable{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    display: block;
+    padding: 25px;
+    margin: 0 0 25px 3%;
+    width: 90%;
+    height: 50%;
+    background: #f4f4f4;
+
+}
+.title{
+    margin-bottom: 30px;
+}
+.tab-pane{
+    padding: 25px;
+    font-size: 14px;
+}
+
+.nav-tabs li a{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.field{
+    border-top: 1px solid #ddd;
+    padding: 25px 25px 0 0;
+}
+
+.btn{
+    padding: 12px;
+    margin: 0  20px 0 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #0088cc;
+}
+
+#log-panel{
+    margin-top:20px;
+}

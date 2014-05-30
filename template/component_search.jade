@@ -1,0 +1,28 @@
+extends ./layout/layout.jade
+
+block content
+    .container-fluid
+      .row-fluid(style='margin-top: 20px;')
+        .page-main.page-home.span9
+          .container-fluid
+            .row-fluid
+              .span12
+                h1 Components
+                form#package-search-form.form-inline(style='margin-top: 1em;', action='#{searchUrl}',method='GET')
+                  .control-group
+                    .input-append
+                      input#package-search-q(type='text', placeholder='Search',name='key')
+                      button#package-search-submit.btn(type='submit') 搜索
+                      span.help-inline
+            #searchResults.row-fluid(style='margin-top: 1.618em; display: block;')
+              h3
+                em #{key}
+                | 的搜索结果
+              ol.package-list.search-results-list
+                for component in components
+                    li.row-fluid
+                      .details.span8
+                        a.name(href='#{component.componentUrl}')
+                          | #{component.name}
+                        .description
+                          | #{component.description}

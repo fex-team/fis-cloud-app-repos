@@ -1,0 +1,52 @@
+!!! 5
+html
+    head
+        title Lights
+        link(
+            rel="stylesheet"
+            href="/static/#{appName}/css/gc.css"
+        )
+        link(
+            rel="stylesheet"
+            href="/static/#{appName}/css/packages.css"
+        )
+        link(
+            rel="stylesheet"
+            href="/static/#{appName}/css/github-modified.css"
+        )
+        link(
+            rel="shortcut icon"
+            href="/static/#{appName}/image/favicon.ico"
+        )
+        block stylesheets
+    body
+        div.navbar
+            div.navbar-inner
+                div.container-fluid
+                    div#session.pull-right
+                        ul.nav.hidden-phone
+                            if session.username
+                                li
+                                    a(href='/#{appName}/user_detail?name=#{session.username}') #{session.username}
+                                li.divider-vertical
+                                li
+                                    a.signout-link(href='/usersite/logout?url=#{req.originalUrl}')
+                                        i.icon-signout
+                                        | Sign Out
+                            else
+                                li
+                                    a(href="/usersite/register?url=#{req.originalUrl}") 注册
+                                li.divider-vertical
+                                li
+                                    a.signin-link(href="/usersite/login?url=#{req.originalUrl}") 登录
+                                        i.icon-signin
+                    ul.nav
+                        li
+                            a(href="/#{appName}/components") 前端资源聚合平台 - lights
+                        li
+                            a(href="http://fe.baidu.com/doc/fis/lights/") 文档
+        div#content
+            block content
+
+        script(type="text/javascript" src="/static/#{appName}/js/jquery.js")
+        block scripts
