@@ -1,19 +1,19 @@
 {
   "name": "fis-cloud-app-repos",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "fis-cloud-app-repos",
   "main": "fis-cloud-app-repos.js",
   "dependencies": {
     "async": "0.2.9",
     "jade": "0.35.0",
     "node-markdown": "0.1.1",
-    "MD5":"1.1.0",
-    "moment":"2.3.1",
+    "MD5": "1.1.0",
+    "moment": "2.3.1",
     "marked": "0.2.9",
-	"sort-component" : "0.1.0",
-    "request" : "2.30.0",
-    "q" : "0.9.6",
-    "underscore" : "1.5.2"
+    "tar" : "0.1.20",
+    "adm-zip" : "0.4.4",
+    "fstream" : "0.1.28",
+    "sort-component": "0.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,5 +27,7 @@
     "name": "fis-team"
   },
   "license": "BSD",
-  "readme": "This file was created by JetBrains PhpStorm 6.0 for binding GitHub repository"
+  "readme": "This file was created by JetBrains PhpStorm 6.0 for binding GitHub repository",
+  "_id": "fis-cloud-app-repos@0.0.9",
+  "_from": "fis-cloud-app-repos@*"
 }
