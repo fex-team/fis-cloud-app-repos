@@ -1,6 +1,6 @@
 {
   "name": "fis-cloud-app-repos",
-  "version": "0.0.13",
+  "version": "0.1.4",
   "description": "fis-cloud-app-repos",
   "main": "fis-cloud-app-repos.js",
   "dependencies": {
