@@ -12,7 +12,7 @@ html
         )
         link(
             rel="stylesheet"
-            href="/static/#{appName}/css/github-modified.css"
+            href="/static/#{appName}/css/github_modified.css"
         )
         link(
             rel="shortcut icon"
@@ -44,9 +44,7 @@ html
                         li
                             a(href="/#{appName}/components") 前端资源聚合平台 - lights
                         li
-                            a(href="http://fe.baidu.com/doc/fis/lights/") 文档
+                            a(href="/#{appName}/doc") 文档
         div#content
             block content
-
-        script(type="text/javascript" src="/static/#{appName}/js/jquery.js")
         block scripts

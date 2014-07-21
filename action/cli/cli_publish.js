@@ -34,29 +34,37 @@ module.exports = function(req, res, app){
                     if(readme_path){
                         var readmeFile = Component.getReadmeFile(config.name, config.version);
                         config.readmeFile = readmeFile;
-                        fis.db.writeFile(readmeFile, {}, readme_path, function(error, gs){});
-                    }
-                    if(component){
-                        Component.updateComponent(component, config, user_name, email, function(error, result){
-                            if(!error){
-                                res.send(200, "Publish component [" + component.name + "@" + config.version + "] success!");
-                            }else{
-                                res.send(500, "Publish component [" + component.name + "@" + config.version + "] error [" + error + "]");
+                        fis.db.writeFile(readmeFile, {}, readme_path, function(error, gs){
+                            if(error){
+                                console.log(error);
                             }
+                            _publish(component, config, user_name, email, cb);
                         });
                     }else{
-                        Component.addComponent(config, user_name, email, function(error, result){
-                            if(!error){
-                                res.send(200, "Publish component [" + config.name + "@" + config.version + "] success!");
-                            }else{
-                                res.send(500, "Publish component [" + config.name + "@" + config.version + "] error [" + error + "]");
-                            }
-                        })
-                    }
+                        _publish(component, config, user_name, email, cb);
+                    } 
                 }else{
                     res.send(500, error);
                 }
             });
         }
     });
+    
+    function _publish(component, config, user_name, email, callback){
+        if(component){
+            Component.updateComponent(component, config, user_name, email, callback);
+        }else{
+            Component.addComponent(config, user_name, email, callback);
+        }
+    }
+
+    function cb(error, result){
+        if(error){
+            res.send(500, "Publish component [" + config.name + "@" + config.version + "] error [" + error + "]");
+        }else{
+            res.send(200, "Publish component [" + config.name + "@" + config.version + "] success!");
+        }
+    }
 };
+
+
