@@ -1,5 +1,4 @@
 var render_helper = require("../../lib/render.js"),
-    marked = require('marked'),
     fs = require('fs');
 
 module.exports = function(req, res, app){
@@ -9,6 +8,6 @@ module.exports = function(req, res, app){
     var content = fis.util.read(path);
     res.render("doc",{
         appName : app.get("appName"),
-        doc : marked(content)
+        doc : render_helper.parseMarkdown(content)
     });
 };

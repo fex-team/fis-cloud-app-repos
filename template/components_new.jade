@@ -1,0 +1,181 @@
+!!! 5
+html
+    head
+        title Lights
+        link(
+            rel="stylesheet"
+            href="/static/#{appName}/css/bootstrap.min.css"
+        )
+        link(
+            rel="stylesheet"
+            href="/static/#{appName}/css/index.css"
+        )
+        link(
+            rel="shortcut icon"
+            href="/static/#{appName}/image/favicon.ico"
+        )
+    body
+        header#header
+            nav.main
+                div.logo
+                    strong
+                        a(href="http://lightjs.duapp.com")  Lights~
+                a.doc(href="/repos/doc")
+                    使用文档
+                ul.right.menu2
+                    li
+                        em 筛选资源&nbsp;
+                    li.dropdown(data-filter="categories")
+                        span 分类&nbsp;
+                            i.glyphicon.glyphicon-chevron-down
+                    li.dropdown(data-filter="tags")
+                        span 热门
+                            i.glyphicon.glyphicon-chevron-down
+                    if session.username
+                        li
+                            span
+                                a(href='/#{appName}/user_detail?name=#{session.username}') #{session.username}
+                        
+                        li
+                            span
+                                a.signout-link(href='/usersite/logout?url=#{req.originalUrl}' title="退出登录")
+                                    i.glyphicon.glyphicon-log-out
+                    else
+                        li
+                            span
+                                a(href="/usersite/register?url=#{req.originalUrl}") 注册
+                        
+                        li
+                            span
+                                a.signin-link(href="/usersite/login?url=#{req.originalUrl}") 
+                                    登录
+                    
+
+            nav.filters
+                div.inner
+                    div.filter.list-tags.categories
+                        ul
+                            for cate in data.categories
+                                li
+                                    strong
+                                        a(href='/#{appName}/category?type=#{cate.name}' data-count="#{cate.number}") #{cate.name}
+
+                    div.filter.list-tags.tags
+                        ul
+                            for tag in data.hotTags
+                                li
+                                    strong
+                                        a(href='/#{appName}/category?type=#{tag.name}' data-count="#{tag.number}") #{tag.name}
+
+        <!-- lights介绍 start -->
+        div#intro
+            div.wrap
+                div.pic
+                    img(src="/static/#{appName}/image/device.jpg")
+                h2 Lights - 前端资源聚合平台
+                p Lights 是FIS包管理工具，提供便捷、易用的资源安装、发布、搜索、管理工具。用于团队间快速共享资源，提升开发效率。
+            
+                div.search_wrap
+                    form(action='#{searchUrl}',method='GET')
+                        div.input-group.search_box                
+                            input(placeholder="请输入包名称或关键词" type='text' name='key' class="form-control" required="required")             
+                            span.input-group-btn
+                                button.btn.btn-info(id="submit" type="submit") 搜索
+
+        <!-- 资源list start -->
+        div#list
+            div.wrap
+                div.row
+                    <!-- 内容区 -->
+                    div.col-md-9
+                        h3.title
+                            i.glyphicon.glyphicon-bullhorn 最近更新
+
+                        ul.items
+                            
+                            for updateComponent in data.updateComponents
+                                li.item            
+                                    div.hoverpicture
+                                        div.overlay
+                                            div.info
+                                                h4
+                                                    a(href="#" title="#")  #{updateComponent.name}
+                                            div.overlay-buttons
+                                                a(href="#{updateComponent.componentUrl}") 
+                                                    i.glyphicon.glyphicon-zoom-in  
+                                                    查看详情
+                                                a(href="/#{appName}/user_detail?name=#{updateComponent.updateAuthor}")
+                                                    i.glyphicon.glyphicon-user  
+                                                    | #{updateComponent.updateAuthor}
+
+                                        div.img_wrap
+                                            i.glyphicon.glyphicon-tree-conifer
+                                        span.item-small-title  #{updateComponent.name}
+                                        span.time  Update #{updateComponent.updateTime}
+
+                    <!-- 边栏区 -->
+                    div.col-md-3
+                        h3.title
+                            i.glyphicon.glyphicon-cloud-download  下载排行榜
+                        ul.download-list
+                            for downloadComponent in data.downloadComponents
+                                li.row
+                                    div.details.col-md-8
+                                        a(href='#{downloadComponent.componentUrl}') #{downloadComponent.name}
+                                    div.extra.col-md-4  #{downloadComponent.totaldowns}&nbsp;
+                                        i.glyphicon.glyphicon-download-alt
+
+                        h3.title
+                            i.glyphicon.glyphicon-list 贡献排行榜
+                        ul.user-list
+                            for submittorComponent in data.submittorComponents
+                                li.row
+                                    div.details.col-md-8
+                                        a(href='/#{appName}/user_detail?name=#{submittorComponent.name}') #{submittorComponent.name}
+                                    div.col-md-4 | #{submittorComponent.value} 
+                                        i.glyphicon.glyphicon-briefcase
+
+
+        script(src='/static/#{appName}/js/jquery.min.js')
+
+        script
+            $(function(){
+                
+                $('.dropdown').click(function() {
+                    var type = $(this).attr('data-filter');
+                    if ($(this).hasClass('active')) {
+                        $(this).removeClass('active');
+                        $('.filters').removeClass('open');
+                        $('.filters').slideToggle('slow');
+                        setTimeout(function() {
+                            $('.filters .filter').hide();
+                        }, 500);
+                    } else {
+                        $('.dropdown').removeClass('active');
+                        $(this).addClass('active');
+                        if ($('.filters').hasClass('open')) {
+                            $('.filters .filter').hide();
+                            $('.filters .filter.' + type).fadeIn();
+                        } else {
+                            $('.filters').addClass('open');
+                            $('.filters .filter.' + type).fadeIn();
+                            $('.filters').slideToggle('slow');
+                        }
+                    }
+                    return false;
+                });
+
+                 $(window).scroll(function() {
+
+                    var scrollTop = $(window).scrollTop();
+
+                    if (scrollTop > 48) {
+                        $('.dropdown').removeClass('active');
+                        $('.filters').removeClass('open');
+                        $('.filters, .filters .filter').hide();
+                    }
+
+                });
+            })
+     
+

@@ -58,7 +58,7 @@ module.exports = function(req, res, app){
         if(error){
             res.send(500, error);
         }else{
-            res.render("components", {
+            res.render("components_new", {
                 data : results,
                 appName : app.get("appName"),
                 redirectUrl : req.originalUrl,
