@@ -3,12 +3,26 @@ var Component = require('../../lib/component.js');
 module.exports = function(req, res, app){
     var query = {};
     if(req.query.q){
-        query = req.query.q;
-        Component.getComponentByName(query, function(err, result){
-            if(err){
-                res.json(500, {error : err});
+        var name = req.query.q;
+        var version = req.query.version;
+        var ref = req.query.ref || 'component.json';
+
+        Component.getComponentAttachment(name, version, function(error, file, type){
+            if(!error){
+
+                fis.db.read(file, {}, function(error, content){
+                    var AdmZip = require('adm-zip');
+                    var zip = new AdmZip(content);
+                    var contents = zip.readAsText(ref);
+
+                    res.json({
+                        contents: new Buffer(contents).toString('base64'),
+                        encoding: 'base64'
+                    });
+                });
+
             }else{
-                res.json(200, result);
+                res.send(500, error);
             }
         });
     }
