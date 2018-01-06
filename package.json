@@ -4,19 +4,18 @@
   "description": "fis-cloud-app-repos",
   "main": "fis-cloud-app-repos.js",
   "dependencies": {
+    "MD5": "1.1.0",
+    "adm-zip": "0.4.4",
     "async": "0.2.9",
+    "fstream": "0.1.28",
+    "highlight.js": "8.1.0",
     "jade": "0.35.0",
+    "marked": "^0.3.9",
+    "moment": "^2.20.1",
     "node-markdown": "0.1.1",
-    "MD5":"1.1.0",
-    "moment":"2.3.1",
-    "marked": "0.3.2",
-    "request" : "2.30.0",
-    "q" : "0.9.6",
-    "underscore" : "1.5.2",
-    "tar" : "0.1.20",
-    "adm-zip" : "0.4.4",
-    "fstream" : "0.1.28",
-    "highlight.js": "8.1.0"
+    "q": "0.9.6",
+    "request": "2.30.0",
+    "underscore": "1.5.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
